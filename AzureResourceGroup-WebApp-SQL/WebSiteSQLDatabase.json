@@ -1,5 +1,5 @@
 {
-  "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json#",
+  "$schema": "https://schema.management.azure.com/schemas/2022-11-01/deploymentTemplate.json#",
   "contentVersion": "1.0.0.0",
   "parameters": {
     "hostingPlanName": {
@@ -90,7 +90,7 @@
       "tags": {
         "displayName": "SqlServer"
       },
-      "apiVersion": "2014-04-01-preview",
+      "apiVersion": "2022-11-01-preview",
       "properties": {
         "administratorLogin": "[parameters('administratorLogin')]",
         "administratorLoginPassword": "[parameters('administratorLoginPassword')]"
@@ -103,7 +103,7 @@
           "tags": {
             "displayName": "Database"
           },
-          "apiVersion": "2014-04-01-preview",
+          "apiVersion": "2022-11-01-preview",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/servers/', variables('sqlserverName'))]"
           ],
@@ -116,7 +116,7 @@
         },
         {
           "type": "firewallrules",
-          "apiVersion": "2014-04-01-preview",
+          "apiVersion": "2022-11-01-preview",
           "dependsOn": [
             "[resourceId('Microsoft.Sql/servers/', variables('sqlserverName'))]"
           ],
@@ -130,7 +130,7 @@
       ]
     },
     {
-      "apiVersion": "2015-08-01",
+      "apiVersion": "2022-11-01",
       "name": "[parameters('hostingPlanName')]",
       "type": "Microsoft.Web/serverfarms",
       "location": "[resourceGroup().location]",
@@ -146,7 +146,7 @@
       }
     },
     {
-      "apiVersion": "2015-08-01",
+      "apiVersion": "2022-11-01",
       "name": "[variables('webSiteName')]",
       "type": "Microsoft.Web/sites",
       "location": "[resourceGroup().location]",
@@ -163,7 +163,7 @@
       },
       "resources": [
         {
-          "apiVersion": "2015-08-01",
+          "apiVersion": "2022-11-01",
           "type": "config",
           "name": "connectionstrings",
           "dependsOn": [
@@ -179,7 +179,7 @@
       ]
     },
     {
-      "apiVersion": "2014-04-01",
+      "apiVersion": "2022-11-01",
       "name": "[concat(parameters('hostingPlanName'), '-', resourceGroup().name)]",
       "type": "Microsoft.Insights/autoscalesettings",
       "location": "[resourceGroup().location]",
@@ -245,7 +245,7 @@
       }
     },
     {
-      "apiVersion": "2014-04-01",
+      "apiVersion": "2022-11-01",
       "name": "[concat('ServerErrors ', variables('webSiteName'))]",
       "type": "Microsoft.Insights/alertrules",
       "location": "[resourceGroup().location]",
@@ -279,7 +279,7 @@
       }
     },
     {
-      "apiVersion": "2014-04-01",
+      "apiVersion": "2022-11-01",
       "name": "[concat('ForbiddenRequests ', variables('webSiteName'))]",
       "type": "Microsoft.Insights/alertrules",
       "location": "[resourceGroup().location]",
@@ -313,7 +313,7 @@
       }
     },
     {
-      "apiVersion": "2014-04-01",
+      "apiVersion": "2022-11-01",
       "name": "[concat('CPUHigh ', parameters('hostingPlanName'))]",
       "type": "Microsoft.Insights/alertrules",
       "location": "[resourceGroup().location]",
@@ -347,7 +347,7 @@
       }
     },
     {
-      "apiVersion": "2014-04-01",
+      "apiVersion": "2022-11-01",
       "name": "[concat('LongHttpQueue ', parameters('hostingPlanName'))]",
       "type": "Microsoft.Insights/alertrules",
       "location": "[resourceGroup().location]",
@@ -381,7 +381,7 @@
       }
     },
     {
-      "apiVersion": "2014-04-01",
+      "apiVersion": "2022-11-01",
       "name": "[variables('webSiteName')]",
       "type": "Microsoft.Insights/components",
       "location": "East US",
